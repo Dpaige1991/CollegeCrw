@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Container from "@/components/Container";
@@ -8,7 +9,7 @@ import Container from "@/components/Container";
 const navLinks = [
   { label: "Trips", href: "/trips" },
   { label: "About", href: "/about" },
-  { label: "Campus Reps", href: "/campus-reps" },
+  { label: "Crew Captains", href: "/crew-captains" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
@@ -24,17 +25,14 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-[var(--brand-border)] bg-[#fcfcf8]/90 backdrop-blur">
       <Container className="flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-orange)] text-lg font-black text-white shadow-md">
-            C
-          </div>
-          <div>
-            <p className="text-lg font-extrabold tracking-tight text-[var(--brand-navy)]">
-              College Crw
-            </p>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--brand-teal)]">
-              Travel. Friends. Explore.
-            </p>
-          </div>
+          <Image
+            src="/images/college-crw-logo.png"
+            alt="College Crw logo"
+            width={180}
+            height={60}
+            className="h-auto w-[140px] md:w-[180px]"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

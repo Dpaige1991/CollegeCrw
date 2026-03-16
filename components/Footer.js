@@ -25,7 +25,7 @@ export default function Footer() {
         <div>
           <h4 className="font-bold text-[var(--brand-cream)]">Community</h4>
           <div className="mt-4 space-y-3 text-sm text-[var(--brand-cream)]/80">
-            <Link href="/campus-reps" className="block hover:text-[var(--brand-yellow)]">Campus Reps</Link>
+            <Link href="/crew-captains" className="block hover:text-[var(--brand-yellow)]">Crew Captains</Link>
             <Link href="/join" className="block hover:text-[var(--brand-yellow)]">Join</Link>
             <Link href="/contact" className="block hover:text-[var(--brand-yellow)]">Contact</Link>
           </div>

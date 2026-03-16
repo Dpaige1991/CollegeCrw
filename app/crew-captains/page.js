@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Crew Captains | College Crw",
-  description: "Lead trips, build community, and earn rewards as a College Crw Crew Captain.",
+  description:
+    "Lead trips, build community, and earn rewards as a College Crw Crew Captain.",
 };
 
 const perks = [
@@ -11,7 +14,7 @@ const perks = [
   "Build your own travel crew community",
 ];
 
-export default function CampusRepsPage() {
+export default function CrewCaptainsPage() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <section className="bg-slate-950 text-white">
@@ -23,8 +26,8 @@ export default function CampusRepsPage() {
             Lead your crew, build momentum, and earn rewards
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-slate-300">
-            Our Crew Captain program is for students who love bringing people together
-            and helping their friends plan unforgettable trips.
+            Our Crew Captain program is for students who love bringing people
+            together and helping their friends plan unforgettable trips.
           </p>
         </div>
       </section>
@@ -34,7 +37,10 @@ export default function CampusRepsPage() {
           <h2 className="text-3xl font-bold">Why become a Crew Captain?</h2>
           <div className="mt-6 space-y-4">
             {perks.map((perk) => (
-              <div key={perk} className="rounded-2xl bg-slate-50 px-5 py-4 text-slate-700">
+              <div
+                key={perk}
+                className="rounded-2xl bg-slate-50 px-5 py-4 text-slate-700"
+              >
                 {perk}
               </div>
             ))}
@@ -50,9 +56,12 @@ export default function CampusRepsPage() {
             <p>• Help your crew lock in unforgettable trips</p>
           </div>
 
-          <button className="mt-8 rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.02]">
+          <Link
+            href="/join"
+            className="mt-8 inline-flex rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.02]"
+          >
             Apply to Become a Crew Captain
-          </button>
+          </Link>
         </div>
       </section>
     </main>
