@@ -56,12 +56,21 @@ export default function CrewCaptainsPage() {
             <p>• Help your crew lock in unforgettable trips</p>
           </div>
 
-          <Link
-            href="/join"
-            className="mt-8 inline-flex rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.02]"
-          >
-            Apply to Become a Crew Captain
-          </Link>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/join"
+              className="inline-flex rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition hover:scale-[1.02]"
+            >
+              Apply to Become a Crew Captain
+            </Link>
+
+            <Link
+              href="/crew-captains/dashboard"
+              className="inline-flex rounded-full border border-slate-300 px-6 py-3 font-semibold text-slate-900 transition hover:bg-slate-50"
+            >
+              View Dashboard
+            </Link>
+          </div>
         </div>
       </section>
     </main>

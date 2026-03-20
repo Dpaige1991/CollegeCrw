@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import BookingInterestForm from "@/components/BookingInterestForm";
+import TripImageLightbox from "@/components/TripImageLightbox";
 import { getAllTrips, getTripBySlug } from "@/data/trips";
 
 export async function generateStaticParams() {
@@ -11,7 +13,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const trip = getTripBySlug(params.slug);
+  const { slug } = await params;
+  const trip = getTripBySlug(slug);
 
   if (!trip) {
     return {
@@ -25,8 +28,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function TripDetailsPage({ params }) {
-  const trip = getTripBySlug(params.slug);
+export default async function TripDetailsPage({ params }) {
+  const { slug } = await params;
+  const trip = getTripBySlug(slug);
 
   if (!trip) {
     notFound();
@@ -70,8 +74,49 @@ export default function TripDetailsPage({ params }) {
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1.35fr_0.85fr]">
         <div>
           <div className="rounded-[2rem] border border-[var(--brand-border)] bg-white p-8 shadow-sm">
-            <h2 className="text-3xl font-extrabold">Trip Overview</h2>
-            <p className="mt-4 leading-7 text-[var(--brand-teal)]">{trip.description}</p>
+            <h2 className="text-3xl font-extrabold">Description</h2>
+            <p className="mt-4 leading-7 text-[var(--brand-teal)]">
+              {trip.description}
+            </p>
+          </div>
+
+          <div className="mt-8 rounded-[2rem] border border-[var(--brand-border)] bg-white p-8 shadow-sm">
+            <h2 className="text-3xl font-extrabold">Key Spots</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {trip.keySpots.map((spot) => (
+                <div
+                  key={spot}
+                  className="rounded-2xl bg-[var(--brand-cream)] px-5 py-4 font-semibold text-[var(--brand-navy)]"
+                >
+                  {spot}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-[2rem] border border-[var(--brand-border)] bg-white p-8 shadow-sm">
+            <h2 className="text-3xl font-extrabold">Fun Areas</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {trip.funAreas.map((area) => (
+                <div
+                  key={area}
+                  className="rounded-2xl border border-[var(--brand-border)] px-5 py-4 font-semibold text-[var(--brand-teal)]"
+                >
+                  {area}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-[2rem] border border-[var(--brand-border)] bg-white p-8 shadow-sm">
+            <h2 className="text-3xl font-extrabold">Trip Images</h2>
+            <p className="mt-3 text-[var(--brand-teal)]">
+              Click any image to view it larger.
+            </p>
+
+            <div className="mt-6">
+              <TripImageLightbox images={trip.gallery} tripName={trip.name} />
+            </div>
           </div>
 
           <div className="mt-8 rounded-[2rem] border border-[var(--brand-border)] bg-white p-8 shadow-sm">
@@ -117,18 +162,27 @@ export default function TripDetailsPage({ params }) {
 
             <div className="mt-6 space-y-3 text-sm text-[var(--brand-teal)]">
               <p>
-                <span className="font-bold text-[var(--brand-navy)]">Location:</span> {trip.location}
+                <span className="font-bold text-[var(--brand-navy)]">Trip:</span>{" "}
+                {trip.name}
               </p>
               <p>
-                <span className="font-bold text-[var(--brand-navy)]">Dates:</span> {trip.date}
+                <span className="font-bold text-[var(--brand-navy)]">Location:</span>{" "}
+                {trip.location}
               </p>
               <p>
-                <span className="font-bold text-[var(--brand-navy)]">Duration:</span> {trip.duration}
+                <span className="font-bold text-[var(--brand-navy)]">Dates:</span>{" "}
+                {trip.date}
+              </p>
+              <p>
+                <span className="font-bold text-[var(--brand-navy)]">Duration:</span>{" "}
+                {trip.duration}
               </p>
             </div>
 
             <div className="mt-8 rounded-2xl bg-[var(--brand-cream)] p-5">
-              <h3 className="font-extrabold text-[var(--brand-navy)]">What’s Included</h3>
+              <h3 className="font-extrabold text-[var(--brand-navy)]">
+                What’s Included
+              </h3>
               <ul className="mt-4 space-y-3 text-sm text-[var(--brand-teal)]">
                 {trip.includes.map((item) => (
                   <li key={item}>• {item}</li>

@@ -5,11 +5,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Container from "@/components/Container";
+import WishlistNavBadge from "@/components/WishlistNavBadge";
 
 const navLinks = [
   { label: "Trips", href: "/trips" },
-  { label: "About", href: "/about" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Crew Captains", href: "/crew-captains" },
+  { label: "Captain Dashboard", href: "/crew-captains/dashboard" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
@@ -25,14 +27,13 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-[var(--brand-border)] bg-[#fcfcf8]/90 backdrop-blur">
       <Container className="flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/images/college-crw-logo.png"
-            alt="College Crw logo"
-            width={180}
-            height={60}
-            className="h-auto w-[140px] md:w-[180px]"
-            priority
-          />
+        <Image
+          src="/images/college-crw-logo.png"
+          alt="College Crw logo"
+          width={180}
+          height={60}
+          className="h-auto w-[140px] md:w-[180px] object-contain"
+        />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

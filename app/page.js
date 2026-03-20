@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import FeaturedTrips from "@/components/FeaturedTrips";
+import GallerySlideshow from "@/components/GallerySlideshow";
 import DestinationShowcase from "@/components/DestinationShowcase";
 import WhyStudentsLove from "@/components/WhyStudentsLove";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Hero />
       <TrustBar />
       <FeaturedTrips />
+      <GallerySlideshow />
       <DestinationShowcase />
       <WhyStudentsLove />
       <WhyChooseUs />
