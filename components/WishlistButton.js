@@ -2,50 +2,65 @@
 
 import { useEffect, useState } from "react";
 
+const STORAGE_KEY = "college-crw-wishlist";
+
 export default function WishlistButton({ trip }) {
   const [saved, setSaved] = useState(false);
-  const storageKey = "college-crw-wishlist";
 
   useEffect(() => {
-    const raw = localStorage.getItem(storageKey);
-    const items = raw ? JSON.parse(raw) : [];
-    setSaved(items.some((item) => item.slug === trip.slug));
-  }, [trip.slug]);
+    if (!trip?.slug) return;
+
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const items = raw ? JSON.parse(raw) : [];
+      setSaved(Array.isArray(items) && items.some((item) => item?.slug === trip.slug));
+    } catch (error) {
+      console.error("Wishlist read error:", error);
+      setSaved(false);
+    }
+  }, [trip?.slug]);
 
   function toggleWishlist(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    const raw = localStorage.getItem(storageKey);
-    const items = raw ? JSON.parse(raw) : [];
+    if (!trip?.slug || !trip?.name) return;
 
-    const exists = items.some((item) => item.slug === trip.slug);
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const items = raw ? JSON.parse(raw) : [];
+      const safeItems = Array.isArray(items) ? items : [];
 
-    let nextItems;
+      const exists = safeItems.some((item) => item?.slug === trip.slug);
 
-    if (exists) {
-      nextItems = items.filter((item) => item.slug !== trip.slug);
-      setSaved(false);
-    } else {
-      nextItems = [
-        ...items,
-        {
-          id: trip.id,
-          slug: trip.slug,
-          name: trip.name,
-          location: trip.location,
-          price: trip.price,
-          image: trip.image,
-          shortDescription: trip.shortDescription,
-          date: trip.date,
-          category: trip.category,
-        },
-      ];
-      setSaved(true);
+      let nextItems;
+
+      if (exists) {
+        nextItems = safeItems.filter((item) => item?.slug !== trip.slug);
+        setSaved(false);
+      } else {
+        nextItems = [
+          ...safeItems,
+          {
+            id: trip.id ?? null,
+            slug: trip.slug,
+            name: trip.name,
+            location: trip.location ?? "",
+            price: trip.price ?? "",
+            image: trip.image ?? "",
+            shortDescription: trip.shortDescription ?? "",
+            date: trip.date ?? "",
+            category: trip.category ?? "",
+          },
+        ];
+        setSaved(true);
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextItems));
+      window.dispatchEvent(new Event("wishlist-updated"));
+    } catch (error) {
+      console.error("Wishlist write error:", error);
     }
-
-    localStorage.setItem(storageKey, JSON.stringify(nextItems));
-    window.dispatchEvent(new Event("wishlist-updated"));
   }
 
   return (

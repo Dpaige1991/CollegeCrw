@@ -2,6 +2,10 @@ import Link from "next/link";
 import WishlistButton from "@/components/WishlistButton";
 
 export default function TripCard({ trip }) {
+  if (!trip || !trip.slug || !trip.name) {
+    return null;
+  }
+
   return (
     <Link
       href={`/trips/${trip.slug}`}
@@ -10,13 +14,13 @@ export default function TripCard({ trip }) {
       <div className="relative overflow-hidden">
         <div
           className="h-64 w-full bg-cover bg-center transition duration-500 group-hover:scale-105"
-          style={{ backgroundImage: `url(${trip.image})` }}
+          style={{ backgroundImage: `url(${trip.image || "/images/trips/placeholder.jpg"})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-navy)]/50 to-transparent" />
 
         <div className="absolute left-4 top-4">
           <span className="rounded-full bg-[var(--brand-cream)] px-3 py-1 text-xs font-bold text-[var(--brand-navy)] shadow">
-            {trip.category}
+            {trip.category || "Trip"}
           </span>
         </div>
 
@@ -32,21 +36,23 @@ export default function TripCard({ trip }) {
               {trip.name}
             </h3>
             <p className="mt-2 text-sm font-medium text-[var(--brand-teal)]">
-              {trip.location}
+              {trip.location || "Destination coming soon"}
             </p>
           </div>
 
           <span className="rounded-full bg-[var(--brand-orange)] px-3 py-1 text-sm font-bold text-white">
-            ${trip.price}
+            ${trip.price ?? "TBD"}
           </span>
         </div>
 
         <p className="mt-4 text-sm leading-6 text-[var(--brand-teal)]">
-          {trip.shortDescription}
+          {trip.shortDescription || "Explore this trip for more details."}
         </p>
 
         <div className="mt-6 flex items-center justify-between border-t border-[var(--brand-border)] pt-4">
-          <span className="text-sm text-[var(--brand-teal)]">{trip.date}</span>
+          <span className="text-sm text-[var(--brand-teal)]">
+            {trip.date || "Dates coming soon"}
+          </span>
           <span className="text-sm font-bold text-[var(--brand-orange)] transition group-hover:translate-x-1">
             View details →
           </span>

@@ -1,57 +1,88 @@
-import Link from "next/link";
-import WishlistButton from "@/components/WishlistButton";
+"use client";
 
-export default function TripCard({ trip }) {
-  return (
-    <Link
-      href={`/trips/${trip.slug}`}
-      className="group block overflow-hidden rounded-[2rem] border border-[var(--brand-border)] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
-    >
-      <div className="relative overflow-hidden">
-        <div
-          className="h-64 w-full bg-cover bg-center transition duration-500 group-hover:scale-105"
-          style={{ backgroundImage: `url(${trip.image})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-navy)]/50 to-transparent" />
+import { useEffect, useState } from "react";
+import TripCard from "@/components/TripCard";
 
-        <div className="absolute left-4 top-4">
-          <span className="rounded-full bg-[var(--brand-cream)] px-3 py-1 text-xs font-bold text-[var(--brand-navy)] shadow">
-            {trip.category}
-          </span>
-        </div>
+const STORAGE_KEY = "college-crw-wishlist";
 
-        <div className="absolute right-4 top-4">
-          <WishlistButton trip={trip} />
-        </div>
+export default function WishlistClient() {
+  const [items, setItems] = useState([]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    function loadWishlist() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+
+        const validItems = Array.isArray(parsed)
+          ? parsed.filter(
+              (item) =>
+                item &&
+                typeof item === "object" &&
+                typeof item.slug === "string" &&
+                item.slug.trim() !== "" &&
+                typeof item.name === "string"
+            )
+          : [];
+
+        setItems(validItems);
+      } catch (error) {
+        console.error("Failed to load wishlist:", error);
+        setItems([]);
+      }
+    }
+
+    setMounted(true);
+    loadWishlist();
+    window.addEventListener("wishlist-updated", loadWishlist);
+    window.addEventListener("storage", loadWishlist);
+
+    return () => {
+      window.removeEventListener("wishlist-updated", loadWishlist);
+      window.removeEventListener("storage", loadWishlist);
+    };
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="rounded-[2rem] border border-[var(--brand-border)] bg-white p-8 shadow-sm">
+        <h2 className="text-2xl font-extrabold text-[var(--brand-navy)]">
+          Loading wishlist...
+        </h2>
       </div>
+    );
+  }
 
-      <div className="p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="text-2xl font-extrabold text-[var(--brand-navy)]">
-              {trip.name}
-            </h3>
-            <p className="mt-2 text-sm font-medium text-[var(--brand-teal)]">
-              {trip.location}
+  return (
+    <div>
+      {items.length === 0 ? (
+        <div className="rounded-[2rem] border border-[var(--brand-border)] bg-white p-8 shadow-sm">
+          <h2 className="text-2xl font-extrabold text-[var(--brand-navy)]">
+            Your wishlist is empty
+          </h2>
+          <p className="mt-3 leading-7 text-[var(--brand-teal)]">
+            Save trips you like and they’ll appear here.
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="mb-8 flex items-center justify-between">
+            <h2 className="text-3xl font-extrabold text-[var(--brand-navy)]">
+              Saved Trips
+            </h2>
+            <p className="text-[var(--brand-teal)]">
+              {items.length} saved trip{items.length === 1 ? "" : "s"}
             </p>
           </div>
 
-          <span className="rounded-full bg-[var(--brand-orange)] px-3 py-1 text-sm font-bold text-white">
-            ${trip.price}
-          </span>
-        </div>
-
-        <p className="mt-4 text-sm leading-6 text-[var(--brand-teal)]">
-          {trip.shortDescription}
-        </p>
-
-        <div className="mt-6 flex items-center justify-between border-t border-[var(--brand-border)] pt-4">
-          <span className="text-sm text-[var(--brand-teal)]">{trip.date}</span>
-          <span className="text-sm font-bold text-[var(--brand-orange)] transition group-hover:translate-x-1">
-            View details →
-          </span>
-        </div>
-      </div>
-    </Link>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {items.map((trip) => (
+              <TripCard key={trip.slug} trip={trip} />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 }
