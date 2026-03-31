@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
 import Container from "@/components/Container";
-import Link from "next/link";
+import HeroSlideshow from "@/components/HeroSlideshow";
 
 export default function Hero() {
   return (
@@ -23,11 +24,15 @@ export default function Hero() {
 
           <h1 className="text-5xl font-extrabold leading-tight tracking-tight text-[var(--brand-navy)] md:text-7xl">
             Travel with your crew.
-            <span className="block text-[var(--brand-orange)]">Make college memories bigger.</span>
+            <span className="block text-[var(--brand-orange)]">
+              Make college memories bigger.
+            </span>
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--brand-teal)] md:text-xl">
-            Discover beach escapes, celebration trips, and group getaways built for students who want more fun, better vibes, and a cleaner booking experience.
+            Discover beach escapes, celebration trips, and group getaways built
+            for students who want more fun, better vibes, and a cleaner booking
+            experience.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -39,25 +44,39 @@ export default function Hero() {
             </Link>
 
             <Link
-              href="/campus-reps"
+              href="/crew-captains"
               className="rounded-full border border-[var(--brand-border)] bg-white px-6 py-3 text-center font-bold text-[var(--brand-navy)] transition hover:border-[var(--brand-aqua)] hover:bg-[var(--brand-aqua)]/10"
             >
-              Become a Campus Rep
+              Become a Crew Captain
             </Link>
           </div>
 
           <div className="mt-10 grid max-w-xl grid-cols-3 gap-4">
             <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-[var(--brand-border)]">
-              <span className="block text-2xl font-black text-[var(--brand-orange)]">25+</span>
-              <span className="text-sm font-medium text-[var(--brand-teal)]">Trip options</span>
+              <span className="block text-2xl font-black text-[var(--brand-orange)]">
+                25+
+              </span>
+              <span className="text-sm font-medium text-[var(--brand-teal)]">
+                Trip options
+              </span>
             </div>
+
             <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-[var(--brand-border)]">
-              <span className="block text-2xl font-black text-[var(--brand-yellow)]">10k+</span>
-              <span className="text-sm font-medium text-[var(--brand-teal)]">Student travelers</span>
+              <span className="block text-2xl font-black text-[var(--brand-yellow)]">
+                10k+
+              </span>
+              <span className="text-sm font-medium text-[var(--brand-teal)]">
+                Student travelers
+              </span>
             </div>
+
             <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-[var(--brand-border)]">
-              <span className="block text-2xl font-black text-[var(--brand-aqua)]">4.9/5</span>
-              <span className="text-sm font-medium text-[var(--brand-teal)]">Traveler rating</span>
+              <span className="block text-2xl font-black text-[var(--brand-aqua)]">
+                4.9/5
+              </span>
+              <span className="text-sm font-medium text-[var(--brand-teal)]">
+                Traveler rating
+              </span>
             </div>
           </div>
         </motion.div>
@@ -66,35 +85,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="grid gap-4 sm:grid-cols-2"
+          className="relative"
         >
-          <div className="rounded-[2rem] bg-[var(--brand-navy)] p-6 text-white shadow-2xl">
-            <p className="text-sm text-[var(--brand-cream)]/80">Featured Escape</p>
-            <h3 className="mt-3 text-2xl font-bold">Cancún Spring Break</h3>
-            <p className="mt-3 text-sm leading-6 text-[var(--brand-cream)]/80">
-              Beachfront hotels, group perks, nightlife access, and unforgettable energy.
-            </p>
-            <div className="mt-8 rounded-2xl bg-white/10 p-4">
-              <p className="text-sm text-[var(--brand-cream)]/80">Starting at</p>
-              <p className="mt-1 text-3xl font-extrabold text-[var(--brand-yellow)]">$399</p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <div className="rounded-[2rem] border border-[var(--brand-border)] bg-white p-6 shadow-lg">
-              <p className="text-sm font-semibold text-[var(--brand-orange)]">Top Group Pick</p>
-              <h3 className="mt-2 text-xl font-bold text-[var(--brand-navy)]">Miami Weekend</h3>
-              <p className="mt-2 text-sm leading-6 text-[var(--brand-teal)]">
-                Perfect for birthdays, friend groups, campus events, and quick getaways.
-              </p>
-            </div>
-
-            <div className="rounded-[2rem] border border-[var(--brand-border)] bg-[linear-gradient(135deg,#ffffff_0%,#ecfffb_100%)] p-6 shadow-lg">
-              <p className="text-sm font-semibold text-[var(--brand-teal)]">Campus Rep Program</p>
-              <h3 className="mt-2 text-xl font-bold text-[var(--brand-navy)]">Lead trips. Earn perks.</h3>
-              <p className="mt-2 text-sm leading-6 text-[var(--brand-teal)]">
-                Bring your people together and unlock exclusive rewards for your campus crew.
-              </p>
+          <div className="overflow-hidden rounded-[2rem] border border-[var(--brand-border)] bg-white shadow-2xl">
+            <div className="relative h-[320px] sm:h-[420px] lg:h-[540px]">
+              <HeroSlideshow />
             </div>
           </div>
         </motion.div>

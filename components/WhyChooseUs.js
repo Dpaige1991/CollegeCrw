@@ -11,7 +11,7 @@ const features = [
   },
   {
     title: "Social by design",
-    text: "Perfect for friend groups, student leaders, organizations, and campus reps.",
+    text: "Perfect for friend groups, student leaders, organizations, and Crew Captainss.",
   },
   {
     title: "Premium feel",

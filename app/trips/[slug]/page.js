@@ -194,7 +194,12 @@ export default async function TripDetailsPage({ params }) {
               <h3 className="mb-4 text-2xl font-extrabold text-[var(--brand-navy)]">
                 Reserve Interest
               </h3>
-              <BookingInterestForm tripName={trip.name} />
+              <a
+                href="/join"
+                className="rounded-full bg-[var(--brand-orange)] px-5 py-2.5 text-center font-bold text-white transition hover:bg-[var(--brand-yellow)] hover:text-[var(--brand-navy)]"
+              >
+                Click To Reserve
+              </a>
             </div>
           </div>
         </aside>

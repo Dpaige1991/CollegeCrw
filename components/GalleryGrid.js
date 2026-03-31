@@ -54,8 +54,6 @@ export default function GalleryGrid({ images }) {
           >
             <div className="relative h-[320px] w-full">
               <Image
-                src={image.src}
-                alt={image.alt}
                 fill
                 className="object-cover transition duration-500 hover:scale-105"
               />
@@ -109,8 +107,6 @@ export default function GalleryGrid({ images }) {
             <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b1720] shadow-2xl">
               <div className="relative h-[70vh] w-full">
                 <Image
-                  src={selectedImage.src}
-                  alt={selectedImage.alt}
                   fill
                   className="object-contain"
                   priority

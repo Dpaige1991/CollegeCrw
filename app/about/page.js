@@ -64,7 +64,7 @@ export const metadata = {
             <div className="rounded-[2rem] bg-slate-50 p-8">
               <h3 className="text-2xl font-bold">Group Experience</h3>
               <p className="mt-3 text-slate-600">
-                From campus reps to friend groups, our platform is built for
+                From Crew Captains to friend groups, our platform is built for
                 planning together instead of figuring everything out alone.
               </p>
             </div>

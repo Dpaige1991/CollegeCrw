@@ -50,7 +50,7 @@ const faqs = [
   },
   {
     question: "Who do I contact for help?",
-    answer: "Email: info@collegecrw.com",
+    answer: "Email: collegecrewinfo@gmail.com",
   },
 ];
 
@@ -182,7 +182,7 @@ export default function FAQPage() {
             Reach out and we’ll help you plan your trip.
           </p>
           <a
-            href="mailto:info@collegecrw.com"
+            href="mailto:collegecrewinfo@gmail.com"
             className="mt-6 inline-block rounded-full bg-[var(--brand-orange)] px-6 py-3 font-bold text-white transition hover:bg-[var(--brand-yellow)] hover:text-[var(--brand-navy)]"
           >
             Contact Us

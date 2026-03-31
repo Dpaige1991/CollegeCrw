@@ -1,7 +1,7 @@
 const items = [
     "Built for student groups",
     "Spring break ready",
-    "Campus rep friendly",
+    "Crew Captains friendly",
     "Curated destinations",
     "Group travel made easier",
   ];

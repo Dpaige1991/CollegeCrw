@@ -160,7 +160,7 @@ export default function TermsPage() {
           <div className="mt-4 space-y-3 leading-7 text-[var(--brand-teal)]">
             <p>For questions:</p>
             <p className="font-semibold text-[var(--brand-navy)]">
-              Email: info@collegecrw.com
+              Email: collegecrewinfo@gmail.com
             </p>
           </div>
         </section>

@@ -9,7 +9,7 @@ const testimonials = [
   },
   {
     name: "Jordan",
-    school: "Campus Rep",
+    school: "Crew Captains",
     quote:
       "It made it easier to share trips with other students and build interest fast.",
   },
